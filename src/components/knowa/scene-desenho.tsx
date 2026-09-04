@@ -136,13 +136,13 @@ function MomentoDesenhar({ onNext }: { onNext: () => void }) {
       <img
         src={charTuga}
         alt="Tuga surfando"
-        className="anim-float pointer-events-none absolute left-[-8%] top-[13%] z-10 w-28 drop-shadow-xl"
+        className="anim-float pointer-events-none absolute left-[1%] top-[13%] z-10 w-28 drop-shadow-xl"
         style={{ animationDelay: "1.2s" }}
       />
       <img
         src={charKinn}
         alt="Kinn comemorando"
-        className="anim-float pointer-events-none absolute right-[-6%] top-[20%] z-10 w-28 drop-shadow-xl"
+        className="anim-float pointer-events-none absolute right-[1%] top-[20%] z-10 w-28 drop-shadow-xl"
         style={{ animationDelay: "0.4s" }}
       />
 
@@ -218,7 +218,7 @@ function MomentoPronto({ onNext }: { onNext: () => void }) {
       <img
         src={charTila}
         alt="Tila comemorando a descoberta"
-        className="anim-float pointer-events-none absolute left-[-7%] top-[30%] z-10 w-32 drop-shadow-xl"
+        className="anim-float pointer-events-none absolute left-[2%] top-[30%] z-10 w-32 drop-shadow-xl"
       />
 
       <div className="scene-veil absolute inset-x-0 bottom-0 z-20 px-6 pb-9 pt-20">

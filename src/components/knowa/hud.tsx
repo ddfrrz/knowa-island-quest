@@ -5,7 +5,7 @@ type HudProps = {
   totalSeals?: number;
 };
 
-/** Floating expedition HUD — compass rose + earned seals. No navbar, ever. */
+/** Floating expedition HUD: compass rose + earned seals. No navbar, ever. */
 export function Hud({ chapter, place, seals, totalSeals = 3 }: HudProps) {
   return (
     <>

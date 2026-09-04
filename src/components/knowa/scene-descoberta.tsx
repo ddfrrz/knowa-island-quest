@@ -40,7 +40,7 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
             }}
           />
 
-          {/* expedition trail — hand-dotted, drawn in with a mask */}
+          {/* expedition trail: hand-dotted, drawn in with a mask */}
           <svg viewBox="0 0 100 100" className="absolute inset-0 size-full" fill="none">
             <defs>
               <mask id="trail-reveal">
@@ -163,7 +163,7 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
           </h2>
           <p className="mt-2.5 max-w-[30ch] text-[15px] leading-snug text-parchment/75">
             {revealed
-              ? "Nenhum explorador chegou lá. Jacob marcou o ponto — e a próxima missão começa nessa costa."
+              ? "Nenhum explorador chegou lá. Jacob marcou o ponto, e a próxima missão começa nessa costa."
               : "Nem Jacob conhece esse pedaço da ilha. Toque na névoa e veja o que ela esconde."}
           </p>
 

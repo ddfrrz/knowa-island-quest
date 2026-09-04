@@ -40,20 +40,33 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
             }}
           />
 
-          {/* expedition trail */}
+          {/* expedition trail — hand-dotted, drawn in with a mask */}
           <svg viewBox="0 0 100 100" className="absolute inset-0 size-full" fill="none">
+            <defs>
+              <mask id="trail-reveal">
+                <path
+                  d="M26 68 C 32 58, 38 54, 44 47 C 52 42, 56 62, 63 74"
+                  stroke="#fff"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  pathLength={100}
+                  style={{
+                    strokeDasharray: "100",
+                    strokeDashoffset: "100",
+                    animation: "k-draw 1800ms cubic-bezier(0.22,1,0.36,1) 400ms forwards",
+                  }}
+                />
+              </mask>
+            </defs>
             <path
               d="M26 68 C 32 58, 38 54, 44 47 C 52 42, 56 62, 63 74"
-              stroke="var(--color-coral)"
-              strokeWidth="1.1"
+              stroke="var(--color-parchment)"
+              strokeOpacity="0.9"
+              strokeWidth="1.2"
               strokeLinecap="round"
-              strokeDasharray="0.6 3.4"
-              style={{
-                strokeDasharray: "60",
-                strokeDashoffset: "60",
-                animation: "k-draw 2000ms cubic-bezier(0.22,1,0.36,1) 400ms forwards",
-                filter: "drop-shadow(0 1px 2px oklch(0 0 0 / 0.6))",
-              }}
+              strokeDasharray="0.4 3.2"
+              mask="url(#trail-reveal)"
+              style={{ filter: "drop-shadow(0 1px 2px oklch(0 0 0 / 0.75))" }}
             />
           </svg>
 

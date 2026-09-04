@@ -67,7 +67,18 @@ export function SceneIdade({ onChoose }: Props) {
         </div>
 
         <div className="mt-auto pt-8">
-          <ActionButton disabled={idade === null} onClick={() => idade && onChoose(idade)}>
+          <div className="mb-7 flex items-center gap-3">
+            <span className="ink-rule h-px flex-1 opacity-40" />
+            <span className="font-display text-[11px] tracking-[0.24em] text-muted-foreground">
+              Knowa Island
+            </span>
+            <span className="ink-rule h-px flex-1 opacity-40" />
+          </div>
+          <ActionButton
+            tone={idade === null ? "quiet" : "ember"}
+            disabled={idade === null}
+            onClick={() => idade && onChoose(idade)}
+          >
             {idade === null ? "Escolha sua idade" : `Entrar com ${idade} anos`}
           </ActionButton>
           <p className="mt-3 text-center text-[10px] uppercase tracking-[0.26em] text-muted-foreground">

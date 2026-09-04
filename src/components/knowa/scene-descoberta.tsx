@@ -122,7 +122,7 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
                     />
                   </svg>
                   <span
-                    className="anim-pop mt-1.5 rounded-full border border-coral/60 bg-abyss/85 px-2 py-0.5 font-display text-[10px] font-semibold tracking-wide text-parchment"
+                    className="anim-pop mt-1.5 whitespace-nowrap rounded-full border border-coral/60 bg-abyss/85 px-2.5 py-0.5 font-display text-[10px] font-semibold tracking-wide text-parchment"
                     style={{ animationDelay: "220ms" }}
                   >
                     Costa Perdida

@@ -8,6 +8,14 @@ type HudProps = {
 /** Floating expedition HUD — compass rose + earned seals. No navbar, ever. */
 export function Hud({ chapter, place, seals, totalSeals = 3 }: HudProps) {
   return (
+    <>
+    <div
+      className="pointer-events-none absolute inset-x-0 top-0 z-20 h-32"
+      style={{
+        background:
+          "linear-gradient(to bottom, oklch(0.15 0.03 168 / 0.85), oklch(0.15 0.03 168 / 0.35) 55%, transparent)",
+      }}
+    />
     <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-start justify-between px-5 pt-5">
       <div className="flex items-center gap-3">
         <Compass />

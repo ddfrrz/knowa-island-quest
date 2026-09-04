@@ -4,6 +4,7 @@ import { SceneIdade } from "@/components/knowa/scene-idade";
 import { SceneConvocacao } from "@/components/knowa/scene-convocacao";
 import { SceneDesafio } from "@/components/knowa/scene-desafio";
 import { SceneDescoberta } from "@/components/knowa/scene-descoberta";
+import { SceneDesenho } from "@/components/knowa/scene-desenho";
 import { SceneCadastro } from "@/components/knowa/scene-cadastro";
 import { SceneEnvio } from "@/components/knowa/scene-envio";
 import { SceneFuturo } from "@/components/knowa/scene-futuro";
@@ -36,6 +37,7 @@ const SCENES = [
   "convocacao",
   "desafio",
   "descoberta",
+  "desenho",
   "cadastro",
   "envio",
 ] as const;
@@ -69,8 +71,9 @@ function Missao() {
           {scene === "convocacao" && <SceneConvocacao onAdvance={() => setScene("desafio")} />}
           {scene === "desafio" && <SceneDesafio onAdvance={() => setScene("descoberta")} />}
           {scene === "descoberta" && (
-            <SceneDescoberta onRestart={() => setScene("cadastro")} />
+            <SceneDescoberta onRestart={() => setScene("desenho")} />
           )}
+          {scene === "desenho" && <SceneDesenho onAdvance={() => setScene("cadastro")} />}
           {scene === "cadastro" && (
             <SceneCadastro
               idade={cadastro.idade}

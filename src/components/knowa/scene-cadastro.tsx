@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { ActionButton } from "./action-button";
 import { Hud } from "./hud";
-import type { Cadastro } from "@/lib/knn-config";
+import {
+  montarRegistro,
+  salvarRegistro,
+  type Cadastro,
+  type Registro,
+} from "@/lib/knn-config";
 
 type Props = {
   idade: number | null;
-  onSubmit: (c: Cadastro) => void;
+  onSubmit: (c: Cadastro, registro: Registro) => void;
 };
 
 function Campo({

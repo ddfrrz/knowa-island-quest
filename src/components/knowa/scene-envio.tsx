@@ -2,16 +2,22 @@ import { useState } from "react";
 import { Fireflies } from "./atmosphere";
 import { ActionButton } from "./action-button";
 import { Hud } from "./hud";
-import { linkWhatsApp, type Cadastro } from "@/lib/knn-config";
+import {
+  linkWhatsApp,
+  registrarEnvioWhatsApp,
+  type Cadastro,
+  type Registro,
+} from "@/lib/knn-config";
 
-type Props = { cadastro: Cadastro; onRestart: () => void };
+type Props = { cadastro: Cadastro; registro: Registro | null; onRestart: () => void };
 
-export function SceneEnvio({ cadastro, onRestart }: Props) {
+export function SceneEnvio({ cadastro, registro, onRestart }: Props) {
   const [enviado, setEnviado] = useState(false);
 
   function abrirWhatsApp() {
     setEnviado(true);
     window.open(linkWhatsApp(cadastro), "_blank", "noopener,noreferrer");
+    if (registro) void registrarEnvioWhatsApp(registro);
   }
 
   return (

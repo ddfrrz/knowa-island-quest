@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { ActionButton } from "./action-button";
 import { Hud } from "./hud";
-import type { Cadastro } from "@/lib/knn-config";
+import {
+  montarRegistro,
+  salvarRegistro,
+  type Cadastro,
+  type Registro,
+} from "@/lib/knn-config";
 
 type Props = {
   idade: number | null;
-  onSubmit: (c: Cadastro) => void;
+  onSubmit: (c: Cadastro, registro: Registro) => void;
 };
 
 function Campo({
@@ -51,6 +56,27 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
   const [email, setEmail] = useState("");
   const [participacao, setParticipacao] = useState(false);
   const [marketing, setMarketing] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+
+  async function registrar() {
+    if (enviando) return;
+    setEnviando(true);
+    const cadastro: Cadastro = {
+      explorador,
+      idade,
+      escola,
+      responsavel,
+      whatsapp,
+      email,
+      participacao,
+      marketing,
+    };
+    const registro = montarRegistro(cadastro);
+    await salvarRegistro(registro);
+    setEnviando(false);
+    onSubmit(cadastro, registro);
+  }
+
 
   const pronto =
     explorador.trim().length > 1 &&
@@ -147,21 +173,10 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
         <div className="mt-6">
           <ActionButton
             tone={pronto ? "ember" : "quiet"}
-            disabled={!pronto}
-            onClick={() =>
-              onSubmit({
-                explorador,
-                idade,
-                escola,
-                responsavel,
-                whatsapp,
-                email,
-                participacao,
-                marketing,
-              })
-            }
+            disabled={!pronto || enviando}
+            onClick={() => void registrar()}
           >
-            Registrar expedição
+            {enviando ? "Registrando..." : "Registrar expedição"}
           </ActionButton>
           {!pronto && (
             <p className="mt-3 text-center text-[11px] leading-snug text-parchment/60">

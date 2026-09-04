@@ -8,7 +8,7 @@ import { SceneDesenho } from "@/components/knowa/scene-desenho";
 import { SceneCadastro } from "@/components/knowa/scene-cadastro";
 import { SceneEnvio } from "@/components/knowa/scene-envio";
 import { SceneFuturo } from "@/components/knowa/scene-futuro";
-import { CADASTRO_VAZIO, type Cadastro } from "@/lib/knn-config";
+import { CADASTRO_VAZIO, type Cadastro, type Registro } from "@/lib/knn-config";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,9 +46,11 @@ type SceneId = (typeof SCENES)[number] | "futuro";
 function Missao() {
   const [scene, setScene] = useState<SceneId>("idade");
   const [cadastro, setCadastro] = useState<Cadastro>(CADASTRO_VAZIO);
+  const [registro, setRegistro] = useState<Registro | null>(null);
 
   function reiniciar() {
     setCadastro(CADASTRO_VAZIO);
+    setRegistro(null);
     setScene("idade");
   }
 
@@ -77,13 +79,14 @@ function Missao() {
           {scene === "cadastro" && (
             <SceneCadastro
               idade={cadastro.idade}
-              onSubmit={(c) => {
+              onSubmit={(c, r) => {
                 setCadastro(c);
+                setRegistro(r);
                 setScene("envio");
               }}
             />
           )}
-          {scene === "envio" && <SceneEnvio cadastro={cadastro} onRestart={reiniciar} />}
+          {scene === "envio" && <SceneEnvio cadastro={cadastro} registro={registro} onRestart={reiniciar} />}
           {scene === "futuro" && <SceneFuturo onRestart={reiniciar} />}
         </div>
 

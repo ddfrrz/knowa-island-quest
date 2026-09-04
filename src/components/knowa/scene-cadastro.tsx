@@ -146,6 +146,7 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
 
         <div className="mt-6">
           <ActionButton
+            tone={pronto ? "ember" : "quiet"}
             disabled={!pronto}
             onClick={() =>
               onSubmit({
@@ -162,7 +163,14 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
           >
             Registrar expedição
           </ActionButton>
+          {!pronto && (
+            <p className="mt-3 text-center text-[11px] leading-snug text-parchment/60">
+              Preencha nome, escola, responsável e WhatsApp e marque a autorização para
+              liberar o registro.
+            </p>
+          )}
         </div>
+
       </div>
     </div>
   );

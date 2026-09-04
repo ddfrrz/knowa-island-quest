@@ -26,7 +26,7 @@ export function ActionButton({ children, onClick, tone = "ember", disabled }: Pr
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`relative w-full overflow-hidden rounded-2xl border py-4 font-display text-[19px] font-semibold tracking-tight transition-transform duration-200 active:scale-[0.97] disabled:opacity-40 ${tones[tone]}`}
+      className={`relative w-full overflow-hidden rounded-2xl border py-4 font-display text-[19px] font-semibold tracking-tight transition-transform duration-200 active:scale-[0.97] disabled:opacity-70 ${tones[tone]}`}
       style={{ boxShadow: disabled ? "none" : glow[tone] }}
     >
       <span className="relative z-10">{children}</span>

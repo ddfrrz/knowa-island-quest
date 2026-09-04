@@ -5,17 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * KNOWA ISLAND — design system
+ * "Ink & Jade": night jungle greens, lantern amber, coral discovery,
+ * parchment type. Everything is a token; components never hardcode color.
  */
 
 @theme inline {
@@ -26,6 +18,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Karla", system-ui, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -45,91 +41,56 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* world tokens */
+  --color-abyss: var(--abyss);
+  --color-canopy: var(--canopy);
+  --color-jade: var(--jade);
+  --color-moss: var(--moss);
+  --color-ember: var(--ember);
+  --color-lantern: var(--lantern);
+  --color-coral: var(--coral);
+  --color-parchment: var(--parchment);
+  --color-ink: var(--ink);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --radius: 1.25rem;
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --abyss: oklch(0.19 0.03 168);
+  --canopy: oklch(0.27 0.045 165);
+  --jade: oklch(0.45 0.09 168);
+  --moss: oklch(0.62 0.1 145);
+  --ember: oklch(0.74 0.16 62);
+  --lantern: oklch(0.86 0.14 82);
+  --coral: oklch(0.68 0.17 32);
+  --parchment: oklch(0.95 0.03 88);
+  --ink: oklch(0.22 0.035 60);
+
+  --background: var(--abyss);
+  --foreground: var(--parchment);
+  --card: var(--canopy);
+  --card-foreground: var(--parchment);
+  --popover: var(--canopy);
+  --popover-foreground: var(--parchment);
+  --primary: var(--ember);
+  --primary-foreground: oklch(0.19 0.04 60);
+  --secondary: var(--canopy);
+  --secondary-foreground: var(--parchment);
+  --muted: oklch(0.32 0.04 165);
+  --muted-foreground: oklch(0.78 0.03 120);
+  --accent: var(--coral);
+  --accent-foreground: oklch(0.98 0.02 88);
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: var(--parchment);
+  --border: oklch(0.4 0.05 160 / 45%);
+  --input: oklch(0.4 0.05 160 / 45%);
+  --ring: var(--lantern);
+
+  --shadow-plate: 0 30px 70px -30px oklch(0 0 0 / 0.85);
+  --shadow-lift: 0 18px 34px -16px oklch(0 0 0 / 0.7);
+  --glow-lantern: 0 0 42px -6px oklch(0.86 0.14 82 / 0.55);
+  --glow-coral: 0 0 46px -6px oklch(0.68 0.17 32 / 0.6);
 }
 
 @layer base {
@@ -137,8 +98,215 @@
     border-color: var(--color-border);
   }
 
+  html,
   body {
-    background-color: var(--color-background);
+    background-color: var(--color-abyss);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+}
+
+/* ---------- texture & atmosphere ---------- */
+
+@utility paper-grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+    background-image: radial-gradient(oklch(1 0 0 / 0.5) 0.5px, transparent 0.6px);
+    background-size: 3px 3px;
+  }
+}
+
+@utility vignette {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      120% 80% at 50% 42%,
+      transparent 38%,
+      oklch(0.12 0.03 168 / 0.55) 78%,
+      oklch(0.1 0.03 168 / 0.9) 100%
+    );
+  }
+}
+
+@utility scene-veil {
+  background-image: linear-gradient(
+    to top,
+    oklch(0.15 0.03 168 / 0.97) 0%,
+    oklch(0.16 0.03 168 / 0.86) 26%,
+    oklch(0.18 0.03 168 / 0.35) 58%,
+    transparent 100%
+  );
+}
+
+@utility ink-rule {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-lantern),
+    transparent
+  );
+}
+
+/* ---------- motion ---------- */
+
+@keyframes k-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes k-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes k-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@keyframes k-float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-14px) translateX(6px);
+  }
+}
+@keyframes k-firefly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(22px, -70px) scale(1);
+  }
+}
+@keyframes k-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes k-stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.7) rotate(-14deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.93) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-2deg);
+  }
+}
+@keyframes k-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes k-mist {
+  0%,
+  100% {
+    transform: translateX(-3%) scale(1.05);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(3%) scale(1.12);
+    opacity: 0.72;
+  }
+}
+@keyframes k-sway {
+  0%,
+  100% {
+    transform: rotate(-1.4deg);
+  }
+  50% {
+    transform: rotate(1.4deg);
+  }
+}
+@keyframes k-shine {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(220%);
+  }
+}
+
+@utility anim-rise {
+  animation: k-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility anim-fade {
+  animation: k-fade 900ms ease-out both;
+}
+@utility anim-breathe {
+  animation: k-breathe 3.4s ease-in-out infinite;
+}
+@utility anim-float {
+  animation: k-float 9s ease-in-out infinite;
+}
+@utility anim-stamp {
+  animation: k-stamp 620ms cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+@utility anim-pop {
+  animation: k-pop 420ms cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+@utility anim-mist {
+  animation: k-mist 14s ease-in-out infinite;
+}
+@utility anim-sway {
+  animation: k-sway 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

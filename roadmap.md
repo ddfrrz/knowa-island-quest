@@ -1,6 +1,7 @@
 # Roadmap
 
 - [x] Direcao de arte Knowa Island (nova identidade)
-- [ ] 3 telas refinadas: Convocacao, Desafio (HELLO com Rhino), Descoberta (mapa)
-- [ ] Restante do fluxo 5-8 (depois da aprovacao visual)
-- [ ] Backend/Sheets/WhatsApp (nao agora)
+- [x] Cores vivas, Rhino azul, textos sem cara de IA
+- [x] Fluxo: idade > convocacao > desafio > descoberta > cadastro > envio WhatsApp
+- [x] Tela do futuro (9 a 15 anos, KNN World Challenge)
+- [ ] Backend/Planilha (nao agora, apenas frontend por enquanto)

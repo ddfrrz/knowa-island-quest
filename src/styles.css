@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * KNOWA ISLAND — design system
+ * KNOWA ISLAND: design system
  * "Ink & Jade": night jungle greens, lantern amber, coral discovery,
  * parchment type. Everything is a token; components never hardcode color.
  */
@@ -50,6 +50,9 @@
   --color-ember: var(--ember);
   --color-lantern: var(--lantern);
   --color-coral: var(--coral);
+  --color-lagoon: var(--lagoon);
+  --color-citrus: var(--citrus);
+  --color-grape: var(--grape);
   --color-parchment: var(--parchment);
   --color-ink: var(--ink);
 }
@@ -57,15 +60,18 @@
 :root {
   --radius: 1.25rem;
 
-  --abyss: oklch(0.19 0.03 168);
-  --canopy: oklch(0.27 0.045 165);
-  --jade: oklch(0.45 0.09 168);
-  --moss: oklch(0.62 0.1 145);
-  --ember: oklch(0.74 0.16 62);
-  --lantern: oklch(0.86 0.14 82);
-  --coral: oklch(0.68 0.17 32);
-  --parchment: oklch(0.95 0.03 88);
-  --ink: oklch(0.22 0.035 60);
+  --abyss: oklch(0.2 0.045 190);
+  --canopy: oklch(0.3 0.07 178);
+  --jade: oklch(0.55 0.15 172);
+  --moss: oklch(0.72 0.18 148);
+  --ember: oklch(0.75 0.19 55);
+  --lantern: oklch(0.87 0.17 85);
+  --coral: oklch(0.68 0.22 28);
+  --lagoon: oklch(0.78 0.16 197);
+  --citrus: oklch(0.87 0.19 118);
+  --grape: oklch(0.6 0.22 305);
+  --parchment: oklch(0.96 0.035 92);
+  --ink: oklch(0.22 0.04 60);
 
   --background: var(--abyss);
   --foreground: var(--parchment);
@@ -77,21 +83,23 @@
   --primary-foreground: oklch(0.19 0.04 60);
   --secondary: var(--canopy);
   --secondary-foreground: var(--parchment);
-  --muted: oklch(0.32 0.04 165);
-  --muted-foreground: oklch(0.78 0.03 120);
+  --muted: oklch(0.34 0.05 180);
+  --muted-foreground: oklch(0.82 0.05 130);
   --accent: var(--coral);
   --accent-foreground: oklch(0.98 0.02 88);
-  --destructive: oklch(0.6 0.2 27);
+  --destructive: oklch(0.62 0.22 27);
   --destructive-foreground: var(--parchment);
-  --border: oklch(0.4 0.05 160 / 45%);
-  --input: oklch(0.4 0.05 160 / 45%);
-  --ring: var(--lantern);
+  --border: oklch(0.48 0.08 178 / 50%);
+  --input: oklch(0.48 0.08 178 / 50%);
+  --ring: var(--lagoon);
 
   --shadow-plate: 0 30px 70px -30px oklch(0 0 0 / 0.85);
   --shadow-lift: 0 18px 34px -16px oklch(0 0 0 / 0.7);
-  --glow-lantern: 0 0 42px -6px oklch(0.86 0.14 82 / 0.55);
-  --glow-coral: 0 0 46px -6px oklch(0.68 0.17 32 / 0.6);
+  --glow-lantern: 0 0 42px -6px oklch(0.87 0.17 85 / 0.6);
+  --glow-coral: 0 0 46px -6px oklch(0.68 0.22 28 / 0.65);
+  --glow-lagoon: 0 0 46px -6px oklch(0.78 0.16 197 / 0.6);
 }
+
 
 @layer base {
   * {

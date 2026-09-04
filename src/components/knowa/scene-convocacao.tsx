@@ -6,7 +6,7 @@ import { Hud } from "./hud";
 export function SceneConvocacao({ onAdvance }: { onAdvance: () => void }) {
   return (
     <div className="vignette paper-grain relative h-full w-full overflow-hidden bg-abyss">
-      {/* depth plane 1 — the world */}
+      {/* depth plane 1: the world */}
       <img
         src={sceneConvocacao}
         alt="Jacob Knowa afasta as folhas e descobre o vale iluminado de Knowa Island"
@@ -16,7 +16,7 @@ export function SceneConvocacao({ onAdvance }: { onAdvance: () => void }) {
         style={{ animationDuration: "1400ms" }}
       />
 
-      {/* depth plane 2 — light and air */}
+      {/* depth plane 2: light and air */}
       <div
         className="pointer-events-none absolute inset-0 anim-breathe"
         style={{
@@ -27,7 +27,7 @@ export function SceneConvocacao({ onAdvance }: { onAdvance: () => void }) {
       <Mist className="inset-x-[-10%] top-[26%] h-40" />
       <Fireflies />
 
-      {/* depth plane 3 — interface */}
+      {/* depth plane 3: interface */}
       <Hud chapter="Capítulo 1" place="Vale de Manawa" seals={0} />
 
       <div className="scene-veil absolute inset-x-0 bottom-0 z-20 px-6 pb-9 pt-24">
@@ -47,7 +47,7 @@ export function SceneConvocacao({ onAdvance }: { onAdvance: () => void }) {
           <span className="italic text-lantern">sem fronteiras</span>
         </h1>
 
-        {/* Jacob speaks — a torn field-note, not a chat bubble */}
+        {/* Jacob speaks: a torn field-note, not a chat bubble */}
         <div
           className="anim-rise anim-sway relative mt-6 max-w-[19rem] origin-bottom-left rounded-[14px] border border-lantern/25 bg-abyss/70 px-4 py-3 backdrop-blur-md"
           style={{ animationDelay: "640ms", boxShadow: "var(--shadow-lift)" }}
@@ -55,7 +55,7 @@ export function SceneConvocacao({ onAdvance }: { onAdvance: () => void }) {
           <span className="absolute -left-1 top-4 h-8 w-1 rounded-full bg-coral" />
           <p className="text-[10px] uppercase tracking-[0.24em] text-coral">Jacob Knowa</p>
           <p className="mt-1.5 text-[15px] leading-snug text-parchment/90">
-            Achei a entrada da ilha. Mas sozinho eu não passo — preciso de você.
+            Achei a entrada da ilha. Mas sozinho eu não passo, preciso de você.
           </p>
         </div>
 

@@ -103,15 +103,31 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
               transition: "background 700ms ease, backdrop-filter 700ms ease",
             }}
           >
-            <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <span className="pointer-events-none absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
               {revealed ? (
-                <svg viewBox="0 0 60 60" className="anim-pop size-16">
-                  <path
-                    d="M30 8 L36 24 L53 25 L40 36 L44 52 L30 43 L16 52 L20 36 L7 25 L24 24 Z"
-                    className="fill-coral stroke-parchment/80"
-                    strokeWidth="1.5"
-                  />
-                </svg>
+                <>
+                  <svg viewBox="0 0 48 48" className="anim-pop size-10">
+                    <circle
+                      cx="24"
+                      cy="24"
+                      r="21"
+                      className="fill-none stroke-coral"
+                      strokeWidth="1.5"
+                      strokeDasharray="2 4"
+                    />
+                    <path
+                      d="M24 11 L27.4 20.6 L37 21 L29.4 27 L32 36.4 L24 30.9 L16 36.4 L18.6 27 L11 21 L20.6 20.6 Z"
+                      className="fill-coral stroke-parchment/85"
+                      strokeWidth="1.2"
+                    />
+                  </svg>
+                  <span
+                    className="anim-pop mt-1.5 rounded-full border border-coral/60 bg-abyss/85 px-2 py-0.5 font-display text-[10px] font-semibold tracking-wide text-parchment"
+                    style={{ animationDelay: "220ms" }}
+                  >
+                    Costa Perdida
+                  </span>
+                </>
               ) : (
                 <span
                   className="anim-breathe grid size-11 place-items-center rounded-full border-2 border-coral bg-abyss/70 font-display text-xl font-semibold text-coral"

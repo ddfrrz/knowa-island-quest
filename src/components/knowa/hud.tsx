@@ -43,6 +43,7 @@ export function Hud({ chapter, place, seals, totalSeals = 3 }: HudProps) {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

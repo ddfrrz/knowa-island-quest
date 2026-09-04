@@ -141,7 +141,7 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
         </div>
 
         {/* the caption */}
-        <div className="mt-6 flex-1">
+        <div className="mt-5 flex flex-1 flex-col">
           <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-coral">
             {revealed ? "Território encontrado" : "Região sem nome"}
           </p>
@@ -161,11 +161,19 @@ export function SceneDescoberta({ onRestart }: { onRestart: () => void }) {
               </>
             )}
           </h2>
-          <p className="mt-3 max-w-[30ch] text-[15px] leading-snug text-parchment/75">
+          <p className="mt-2.5 max-w-[30ch] text-[15px] leading-snug text-parchment/75">
             {revealed
               ? "Nenhum explorador chegou lá. Jacob marcou o ponto — e a próxima missão começa nessa costa."
               : "Nem Jacob conhece esse pedaço da ilha. Toque na névoa e veja o que ela esconde."}
           </p>
+
+          <div className="mt-auto flex items-center gap-3 pt-4">
+            <span className="ink-rule h-px flex-1 opacity-40" />
+            <span className="font-display text-[11px] tracking-[0.2em] text-muted-foreground">
+              {revealed ? "12° 04' S · 71° 18' O" : "Setor 4 · não cartografado"}
+            </span>
+            <span className="ink-rule h-px flex-1 opacity-40" />
+          </div>
         </div>
 
         <div className="mt-6">

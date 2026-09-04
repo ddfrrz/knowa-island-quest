@@ -56,6 +56,27 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
   const [email, setEmail] = useState("");
   const [participacao, setParticipacao] = useState(false);
   const [marketing, setMarketing] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+
+  async function registrar() {
+    if (enviando) return;
+    setEnviando(true);
+    const cadastro: Cadastro = {
+      explorador,
+      idade,
+      escola,
+      responsavel,
+      whatsapp,
+      email,
+      participacao,
+      marketing,
+    };
+    const registro = montarRegistro(cadastro);
+    await salvarRegistro(registro);
+    setEnviando(false);
+    onSubmit(cadastro, registro);
+  }
+
 
   const pronto =
     explorador.trim().length > 1 &&

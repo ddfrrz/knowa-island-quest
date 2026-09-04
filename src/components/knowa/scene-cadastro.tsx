@@ -2,11 +2,13 @@ import { useState } from "react";
 import { ActionButton } from "./action-button";
 import { Hud } from "./hud";
 import {
+  lerOrigem,
   montarRegistro,
   salvarRegistro,
   type Cadastro,
   type Registro,
 } from "@/lib/knn-config";
+
 
 type Props = {
   idade: number | null;
@@ -50,7 +52,8 @@ function Campo({
 
 export function SceneCadastro({ idade, onSubmit }: Props) {
   const [explorador, setExplorador] = useState("");
-  const [escola, setEscola] = useState("");
+  const [escola, setEscola] = useState(() => lerOrigem().escola);
+
   const [responsavel, setResponsavel] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [email, setEmail] = useState("");

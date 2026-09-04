@@ -15,10 +15,11 @@ export function SceneEnvio({ cadastro, registro, onRestart }: Props) {
   const [enviado, setEnviado] = useState(false);
 
   function abrirWhatsApp() {
-    setEnviado(true);
     window.open(linkWhatsApp(cadastro), "_blank", "noopener,noreferrer");
-    if (registro) void registrarEnvioWhatsApp(registro);
+    if (registro && !enviado) void registrarEnvioWhatsApp(registro);
+    setEnviado(true);
   }
+
 
   return (
     <div className="vignette paper-grain relative h-full w-full overflow-hidden bg-abyss">

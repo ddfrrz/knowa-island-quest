@@ -31,7 +31,9 @@ export const CADASTRO_VAZIO: Cadastro = {
 
 export function mensagemWhatsApp(c: Cadastro) {
   return [
-    `Olá! Sou responsável por ${c.explorador || "um explorador"} e concluímos a ${KNN.campaign}.`,
+    `Olá! Sou ${c.responsavel || "o responsável"}, responsável por ${c.explorador || "um explorador"}${
+      c.idade ? ` (${c.idade} anos)` : ""
+    }, e concluímos a ${KNN.campaign}.`,
     `Experiência: ${KNN.experience58}.`,
     c.escola ? `Escola: ${c.escola}.` : "",
     "Estou enviando a foto do desenho da descoberta em Knowa Island.",
@@ -39,6 +41,7 @@ export function mensagemWhatsApp(c: Cadastro) {
     .filter(Boolean)
     .join(" ");
 }
+
 
 export function linkWhatsApp(c: Cadastro) {
   return `https://wa.me/${KNN.whatsapp}?text=${encodeURIComponent(mensagemWhatsApp(c))}`;
@@ -55,12 +58,20 @@ export function lerOrigem(): Origem {
     return { campanha: KNN.campaignSlug, escola: "", fonte: "", qr: "nao" };
   }
   const p = new URLSearchParams(window.location.search);
+  const qrParam = (p.get("qr") || "").toLowerCase();
+  const veioDeQr =
+    qrParam === "1" ||
+    qrParam === "sim" ||
+    qrParam === "true" ||
+    (p.get("source") || "").toLowerCase() === "qr" ||
+    p.has("campaign");
   return {
     campanha: p.get("campaign") || KNN.campaignSlug,
     escola: p.get("school") || "",
     fonte: p.get("source") || "",
-    qr: p.toString() ? "sim" : "nao",
+    qr: veioDeQr ? "sim" : "nao",
   };
+
 }
 
 export type Registro = Record<string, string | number | null>;

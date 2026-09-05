@@ -1,28 +1,28 @@
 import { useState } from "react";
 import {
-  DestinoConfirmado,
-  MissaoDecisao,
-  MissaoDestino,
-  MissaoDispositivo,
-  MissaoFinal,
-  MissaoMensagem,
-  MissaoProblema,
-  Transmissao,
-} from "./missions";
-import { CadastroChallenge, Desbloqueado, RecompensaGate } from "./reward";
+  EscolherGuia,
+  FaseBoss,
+  FaseFrase,
+  FaseMapa,
+  FaseMemory,
+  FasePalavra,
+  FasePortais,
+  MissaoCompleta,
+} from "./phases";
+import type { EntradaDiario } from "./game";
+import { CadastroChallenge, Desbloqueado } from "./reward";
 import { PROGRESSO_VAZIO, type Progresso } from "@/lib/knn-challenge";
 import { CADASTRO_VAZIO, type Cadastro, type Registro } from "@/lib/knn-config";
 
 type Etapa =
-  | "transmissao"
-  | "m1"
-  | "m2"
-  | "m3"
-  | "m4"
-  | "m5"
-  | "m6"
-  | "confirmado"
-  | "recompensa"
+  | "guia"
+  | "f1"
+  | "f2"
+  | "f3"
+  | "f4"
+  | "f5"
+  | "boss"
+  | "completa"
   | "cadastro"
   | "unlocked";
 
@@ -33,49 +33,100 @@ export function ChallengeFlow({
   idade: number | null;
   onRestart: () => void;
 }) {
-  const [etapa, setEtapa] = useState<Etapa>("transmissao");
+  const [etapa, setEtapa] = useState<Etapa>("guia");
+  const [xp, setXp] = useState(0);
+  const [diario, setDiario] = useState<EntradaDiario[]>([]);
   const [progresso, setProgresso] = useState<Progresso>(PROGRESSO_VAZIO);
   const [cadastro, setCadastro] = useState<Cadastro>({ ...CADASTRO_VAZIO, idade });
   const [registro, setRegistro] = useState<Registro | null>(null);
 
+  function registrar(ganho: number, entrada: EntradaDiario) {
+    setXp((v) => v + ganho);
+    setDiario((d) => [...d, entrada]);
+  }
+
   return (
     <div key={etapa} className="anim-fade h-full w-full">
-      {etapa === "transmissao" && <Transmissao onAdvance={() => setEtapa("m1")} />}
-      {etapa === "m1" && <MissaoMensagem onAdvance={() => setEtapa("m2")} />}
-      {etapa === "m2" && <MissaoDispositivo onAdvance={() => setEtapa("m3")} />}
-      {etapa === "m3" && (
-        <MissaoDestino
-          onAdvance={(destino) => {
-            setProgresso((p) => ({ ...p, destino }));
-            setEtapa("m4");
+      {etapa === "guia" && <EscolherGuia onAdvance={() => setEtapa("f1")} />}
+
+      {etapa === "f1" && (
+        <FasePalavra
+          xp={xp}
+          onAdvance={(palavra, ganho) => {
+            registrar(ganho, {
+              titulo: "Missão 01",
+              texto: `Você descobriu sua primeira palavra: ${palavra}.`,
+            });
+            setEtapa("f2");
           }}
         />
       )}
-      {etapa === "m4" && <MissaoProblema onAdvance={() => setEtapa("m5")} />}
-      {etapa === "m5" && (
-        <MissaoDecisao
-          onAdvance={(decisao) => {
-            setProgresso((p) => ({ ...p, decisao }));
-            setEtapa("m6");
+
+      {etapa === "f2" && (
+        <FaseFrase
+          xp={xp}
+          onAdvance={(ganho) => {
+            registrar(ganho, {
+              titulo: "Missão 02",
+              texto: "Você enviou sua primeira mensagem.",
+            });
+            setEtapa("f3");
           }}
         />
       )}
-      {etapa === "m6" && (
-        <MissaoFinal
-          onAdvance={(destinoFinal, motivo) => {
-            setProgresso((p) => ({ ...p, destinoFinal, motivo }));
-            setEtapa("confirmado");
+
+      {etapa === "f3" && (
+        <FaseMapa
+          xp={xp}
+          onAdvance={(destino, ganho) => {
+            setProgresso((p) => ({ ...p, destino, destinoFinal: destino.cidade }));
+            registrar(ganho, {
+              titulo: "Missão 03",
+              texto: `Você escolheu seu destino: ${destino.cidade}.`,
+            });
+            setEtapa("f4");
           }}
         />
       )}
-      {etapa === "confirmado" && (
-        <DestinoConfirmado
-          destino={progresso.destino}
-          destinoFinal={progresso.destinoFinal}
-          onAdvance={() => setEtapa("recompensa")}
+
+      {etapa === "f4" && (
+        <FaseMemory
+          xp={xp}
+          onAdvance={(ganho) => {
+            registrar(ganho, { titulo: "Missão 04", texto: "Você achou todos os pares." });
+            setEtapa("f5");
+          }}
         />
       )}
-      {etapa === "recompensa" && <RecompensaGate onAdvance={() => setEtapa("cadastro")} />}
+
+      {etapa === "f5" && (
+        <FasePortais
+          xp={xp}
+          onAdvance={(portal, decisao, ganho) => {
+            setProgresso((p) => ({ ...p, decisao, motivo: `Portal ${portal}` }));
+            registrar(ganho, {
+              titulo: "Missão 05",
+              texto: `Você atravessou o portal ${portal}.`,
+            });
+            setEtapa("boss");
+          }}
+        />
+      )}
+
+      {etapa === "boss" && (
+        <FaseBoss
+          xp={xp}
+          onAdvance={(ganho) => {
+            registrar(ganho, { titulo: "World boss", texto: "Você venceu o desafio final." });
+            setEtapa("completa");
+          }}
+        />
+      )}
+
+      {etapa === "completa" && (
+        <MissaoCompleta xp={xp} entradas={diario} onAdvance={() => setEtapa("cadastro")} />
+      )}
+
       {etapa === "cadastro" && (
         <CadastroChallenge
           idade={idade}
@@ -87,6 +138,7 @@ export function ChallengeFlow({
           }}
         />
       )}
+
       {etapa === "unlocked" && (
         <Desbloqueado
           cadastro={cadastro}

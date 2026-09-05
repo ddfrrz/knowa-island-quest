@@ -103,7 +103,7 @@ export function ChallengeFlow({
         <FasePortais
           xp={xp}
           onAdvance={(portal, decisao, ganho) => {
-            setProgresso((p) => ({ ...p, decisao, motivo: `Portal ${portal}` }));
+            setProgresso((p) => ({ ...p, decisao, motivo: `Interesse por ${portal.toLowerCase()}` }));
             registrar(ganho, {
               titulo: "Missão 05",
               texto: `Você atravessou o portal ${portal}.`,

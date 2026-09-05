@@ -7,7 +7,7 @@ import { SceneDescoberta } from "@/components/knowa/scene-descoberta";
 import { SceneDesenho } from "@/components/knowa/scene-desenho";
 import { SceneCadastro } from "@/components/knowa/scene-cadastro";
 import { SceneEnvio } from "@/components/knowa/scene-envio";
-import { SceneFuturo } from "@/components/knowa/scene-futuro";
+import { ChallengeFlow } from "@/components/challenge/challenge-flow";
 import { CADASTRO_VAZIO, type Cadastro, type Registro } from "@/lib/knn-config";
 
 export const Route = createFileRoute("/")({
@@ -41,7 +41,7 @@ const SCENES = [
   "cadastro",
   "envio",
 ] as const;
-type SceneId = (typeof SCENES)[number] | "futuro";
+type SceneId = (typeof SCENES)[number] | "challenge";
 
 function Missao() {
   const [scene, setScene] = useState<SceneId>("idade");
@@ -66,7 +66,7 @@ function Missao() {
             <SceneIdade
               onChoose={(idade) => {
                 setCadastro((c) => ({ ...c, idade }));
-                setScene(idade >= 5 && idade <= 8 ? "convocacao" : "futuro");
+                setScene(idade >= 5 && idade <= 8 ? "convocacao" : "challenge");
               }}
             />
           )}
@@ -87,11 +87,13 @@ function Missao() {
             />
           )}
           {scene === "envio" && <SceneEnvio cadastro={cadastro} registro={registro} onRestart={reiniciar} />}
-          {scene === "futuro" && <SceneFuturo onRestart={reiniciar} />}
+          {scene === "challenge" && (
+            <ChallengeFlow idade={cadastro.idade} onRestart={reiniciar} />
+          )}
         </div>
 
         {/* trilha de progresso da missão */}
-        {scene !== "futuro" && (
+        {scene !== "challenge" && (
           <div className="pointer-events-none absolute inset-x-0 bottom-2 z-40 flex justify-center gap-1.5">
             {SCENES.map((s) => (
               <span

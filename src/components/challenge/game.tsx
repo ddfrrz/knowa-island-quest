@@ -16,7 +16,8 @@ export function nivelDe(xp: number) {
   return [...NIVEIS].reverse().find((n) => xp >= n.min) ?? NIVEIS[0];
 }
 
-export function BarraXP({ xp }: { xp: number }) {
+export function BarraXP({ xp: bruto }: { xp: number }) {
+  const xp = Math.min(XP_META, bruto);
   const nivel = nivelDe(xp);
   const pct = Math.min(100, (xp / XP_META) * 100);
   return (

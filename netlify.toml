@@ -4,4 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  NITRO_PRESET = "netlify"
+
+# The app runs fully in the browser after loading, so any route serves index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

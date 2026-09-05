@@ -7,7 +7,7 @@ import { SceneDescoberta } from "@/components/knowa/scene-descoberta";
 import { SceneDesenho } from "@/components/knowa/scene-desenho";
 import { SceneCadastro } from "@/components/knowa/scene-cadastro";
 import { SceneEnvio } from "@/components/knowa/scene-envio";
-import { SceneFuturo } from "@/components/knowa/scene-futuro";
+import { ChallengeFlow } from "@/components/challenge/challenge-flow";
 import { CADASTRO_VAZIO, type Cadastro, type Registro } from "@/lib/knn-config";
 
 export const Route = createFileRoute("/")({

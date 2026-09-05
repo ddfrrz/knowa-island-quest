@@ -41,7 +41,7 @@ const SCENES = [
   "cadastro",
   "envio",
 ] as const;
-type SceneId = (typeof SCENES)[number] | "futuro";
+type SceneId = (typeof SCENES)[number] | "challenge";
 
 function Missao() {
   const [scene, setScene] = useState<SceneId>("idade");

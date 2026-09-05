@@ -533,6 +533,7 @@ export function FaseBoss({ xp, onAdvance }: { xp: number; onAdvance: (ganho: num
   const [etapa, setEtapa] = useState(0);
   const [resp, setResp] = useState<string | null>(null);
   const [sequencia] = useState(() => embaralhar(["▲", "●", "■"]));
+  const [botoes] = useState(() => embaralhar(["▲", "●", "■"]));
   const [toque, setToque] = useState<string[]>([]);
   const [mostrar, setMostrar] = useState(true);
 
@@ -626,7 +627,7 @@ export function FaseBoss({ xp, onAdvance }: { xp: number; onAdvance: (ganho: num
               {mostrar ? "Memorize a ordem." : "Repita a ordem."}
             </p>
             <div className="mt-3 flex justify-center gap-3">
-              {(mostrar ? sequencia : embaralhar(sequencia)).map((s, i) => (
+              {(mostrar ? sequencia : botoes).map((s, i) => (
                 <button
                   key={`${s}-${i}`}
                   type="button"

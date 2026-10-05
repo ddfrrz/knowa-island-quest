@@ -76,7 +76,10 @@ export function lerOrigem(): Origem {
 
 export type Registro = Record<string, string | number | null>;
 
-export function montarRegistro(c: Cadastro): Registro {
+export function montarRegistro(
+  c: Cadastro,
+  etapa: "cadastro" | "completa" = "completa",
+): Registro {
   const origem = lerOrigem();
   return {
     id:
@@ -93,8 +96,8 @@ export function montarRegistro(c: Cadastro): Registro {
     responsavel: c.responsavel,
     whatsapp: c.whatsapp,
     email: c.email,
-    missao_atual: "missao_completa",
-    status_missao: "completa",
+    missao_atual: etapa === "cadastro" ? "cadastro_concluido" : "missao_completa",
+    status_missao: etapa === "cadastro" ? "iniciada" : "completa",
     recompensa: "Certificado de Explorador + experiencia KNN",
     whatsapp_utilizado: "nao",
     desenho_enviado: "nao",

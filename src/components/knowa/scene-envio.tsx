@@ -16,7 +16,13 @@ export function SceneEnvio({ cadastro, registro, onRestart }: Props) {
 
   function abrirWhatsApp() {
     window.open(linkWhatsApp(cadastro), "_blank", "noopener,noreferrer");
-    if (registro && !enviado) void registrarEnvioWhatsApp(registro);
+    if (registro && !enviado) {
+      void registrarEnvioWhatsApp({
+        ...registro,
+        missao_atual: "missao_completa",
+        status_missao: "completa",
+      });
+    }
     setEnviado(true);
   }
 

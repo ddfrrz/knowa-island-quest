@@ -10,9 +10,9 @@ import {
   MissaoCompleta,
 } from "./phases";
 import type { EntradaDiario } from "./game";
-import { CadastroChallenge, Desbloqueado } from "./reward";
+import { Desbloqueado } from "./reward";
 import { PROGRESSO_VAZIO, type Progresso } from "@/lib/knn-challenge";
-import { CADASTRO_VAZIO, type Cadastro, type Registro } from "@/lib/knn-config";
+import type { Cadastro, Registro } from "@/lib/knn-config";
 
 type Etapa =
   | "guia"
@@ -23,22 +23,23 @@ type Etapa =
   | "f5"
   | "boss"
   | "completa"
-  | "cadastro"
   | "unlocked";
 
 export function ChallengeFlow({
   idade,
+  cadastro,
+  registro,
   onRestart,
 }: {
   idade: number | null;
+  cadastro: Cadastro;
+  registro: Registro | null;
   onRestart: () => void;
 }) {
   const [etapa, setEtapa] = useState<Etapa>("guia");
   const [xp, setXp] = useState(0);
   const [diario, setDiario] = useState<EntradaDiario[]>([]);
   const [progresso, setProgresso] = useState<Progresso>(PROGRESSO_VAZIO);
-  const [cadastro, setCadastro] = useState<Cadastro>({ ...CADASTRO_VAZIO, idade });
-  const [registro, setRegistro] = useState<Registro | null>(null);
 
   function registrar(ganho: number, entrada: EntradaDiario) {
     setXp((v) => v + ganho);
@@ -124,19 +125,7 @@ export function ChallengeFlow({
       )}
 
       {etapa === "completa" && (
-        <MissaoCompleta xp={xp} entradas={diario} onAdvance={() => setEtapa("cadastro")} />
-      )}
-
-      {etapa === "cadastro" && (
-        <CadastroChallenge
-          idade={idade}
-          progresso={progresso}
-          onSubmit={(c, r) => {
-            setCadastro(c);
-            setRegistro(r);
-            setEtapa("unlocked");
-          }}
-        />
+        <MissaoCompleta xp={xp} entradas={diario} onAdvance={() => setEtapa("unlocked")} />
       )}
 
       {etapa === "unlocked" && (

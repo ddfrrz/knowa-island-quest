@@ -8,6 +8,7 @@ import {
   type Cadastro,
   type Registro,
 } from "@/lib/knn-config";
+import { montarRegistroChallenge, PROGRESSO_VAZIO } from "@/lib/knn-challenge";
 
 
 type Props = {
@@ -74,7 +75,10 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
       participacao,
       marketing,
     };
-    const registro = montarRegistro(cadastro);
+    const registro =
+      idade && idade >= 9
+        ? montarRegistroChallenge(cadastro, PROGRESSO_VAZIO, "cadastro")
+        : montarRegistro(cadastro, "cadastro");
     await salvarRegistro(registro);
     setEnviando(false);
     onSubmit(cadastro, registro);
@@ -90,20 +94,20 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
 
   return (
     <div className="paper-grain relative h-full w-full overflow-hidden bg-abyss">
-      <Hud chapter="Registro da expedição" place="Diário de bordo" seals={2} />
+        <Hud chapter="Desbloqueio da missão" place="Registro do explorador" seals={0} />
 
       <div className="h-full overflow-y-auto px-6 pb-10 pt-24">
         <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-coral">
-          Etapa 02
+          Primeiro passo
         </p>
         <h2
           className="mt-2 font-display text-[30px] font-semibold leading-[0.95] tracking-tight text-parchment"
           style={{ textWrap: "balance" }}
         >
-          Chame um <span className="italic text-lagoon">responsável</span>
+          Desbloqueie sua <span className="italic text-lagoon">missão</span>
         </h2>
         <p className="mt-2 max-w-[30ch] text-[14px] leading-snug text-parchment/75">
-          O registro guarda a participação do explorador antes do envio do desenho.
+          Um responsável confirma os dados para a aventura começar.
         </p>
 
         <div className="mt-6 space-y-4 rounded-[22px] border border-border bg-canopy/40 p-4 backdrop-blur-md">
@@ -179,7 +183,7 @@ export function SceneCadastro({ idade, onSubmit }: Props) {
             disabled={!pronto || enviando}
             onClick={() => void registrar()}
           >
-            {enviando ? "Registrando..." : "Registrar expedição"}
+            {enviando ? "Registrando..." : "Desbloquear aventura"}
           </ActionButton>
           {!pronto && (
             <p className="mt-3 text-center text-[11px] leading-snug text-parchment/60">

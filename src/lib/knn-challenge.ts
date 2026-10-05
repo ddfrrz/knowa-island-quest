@@ -33,7 +33,11 @@ export const PROGRESSO_VAZIO: Progresso = {
   motivo: "",
 };
 
-export function montarRegistroChallenge(c: Cadastro, p: Progresso): Registro {
+export function montarRegistroChallenge(
+  c: Cadastro,
+  p: Progresso,
+  etapa: "cadastro" | "completa" = "completa",
+): Registro {
   const origem = lerOrigem();
   return {
     id:
@@ -50,8 +54,8 @@ export function montarRegistroChallenge(c: Cadastro, p: Progresso): Registro {
     responsavel: c.responsavel,
     whatsapp: c.whatsapp,
     email: c.email,
-    missao_atual: "world_boss",
-    status_missao: "completa",
+    missao_atual: etapa === "cadastro" ? "cadastro_concluido" : "world_boss",
+    status_missao: etapa === "cadastro" ? "iniciada" : "completa",
     recompensa: "Experiencia KNN World Challenge",
     whatsapp_utilizado: "nao",
     desenho_enviado: "nao_se_aplica",

@@ -247,9 +247,7 @@ function MomentoPronto({ onNext }: { onNext: () => void }) {
         </div>
 
         <div className="anim-rise mt-7" style={{ animationDelay: "520ms" }}>
-          <ActionButton tone="coral" onClick={onNext}>
-            Continuar para o cadastro
-          </ActionButton>
+          <ActionButton tone="coral" onClick={onNext}>Concluir missão</ActionButton>
           <p className="mt-3 text-center text-[10px] uppercase tracking-[0.26em] text-muted-foreground">
             No final o responsável envia a foto pelo WhatsApp
           </p>

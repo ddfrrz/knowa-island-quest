@@ -34,11 +34,11 @@ export const Route = createFileRoute("/")({
 
 const SCENES = [
   "idade",
+  "cadastro",
   "convocacao",
   "desafio",
   "descoberta",
   "desenho",
-  "cadastro",
   "envio",
 ] as const;
 type SceneId = (typeof SCENES)[number] | "challenge";
@@ -66,7 +66,7 @@ function Missao() {
             <SceneIdade
               onChoose={(idade) => {
                 setCadastro((c) => ({ ...c, idade }));
-                setScene(idade >= 5 && idade <= 8 ? "convocacao" : "challenge");
+                setScene("cadastro");
               }}
             />
           )}
@@ -75,20 +75,25 @@ function Missao() {
           {scene === "descoberta" && (
             <SceneDescoberta onRestart={() => setScene("desenho")} />
           )}
-          {scene === "desenho" && <SceneDesenho onAdvance={() => setScene("cadastro")} />}
+          {scene === "desenho" && <SceneDesenho onAdvance={() => setScene("envio")} />}
           {scene === "cadastro" && (
             <SceneCadastro
               idade={cadastro.idade}
               onSubmit={(c, r) => {
                 setCadastro(c);
                 setRegistro(r);
-                setScene("envio");
+                setScene(c.idade && c.idade >= 9 ? "challenge" : "convocacao");
               }}
             />
           )}
           {scene === "envio" && <SceneEnvio cadastro={cadastro} registro={registro} onRestart={reiniciar} />}
           {scene === "challenge" && (
-            <ChallengeFlow idade={cadastro.idade} onRestart={reiniciar} />
+            <ChallengeFlow
+              idade={cadastro.idade}
+              cadastro={cadastro}
+              registro={registro}
+              onRestart={reiniciar}
+            />
           )}
         </div>
 

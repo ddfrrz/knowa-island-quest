@@ -63,8 +63,8 @@ export const UNIDADES = {
     id: "bucarein",
     nome: "KNN Bucarein",
     whatsapp: "554797618660",
-    // TODO: endereço /exec do Apps Script da KNN Bucarein
-    sheets: "",
+    sheets:
+      "https://script.google.com/macros/s/AKfycbx5cMIkGoznBFXdmKsedmvO0ay9BQzv-hLYArL4thOcIfMDRz5H52ivJMDdI1Sjia4M/exec",
   },
 } as const;
 

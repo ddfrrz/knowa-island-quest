@@ -44,12 +44,46 @@ export function mensagemWhatsApp(c: Cadastro) {
 
 
 export function linkWhatsApp(c: Cadastro) {
-  return `https://wa.me/${KNN.whatsapp}?text=${encodeURIComponent(mensagemWhatsApp(c))}`;
+  return `https://wa.me/${lerUnidade().whatsapp}?text=${encodeURIComponent(mensagemWhatsApp(c))}`;
 }
 
 /** URL do Web App do Google Apps Script ja usado pela campanha. */
 export const SHEETS_URL =
   "https://script.google.com/macros/s/AKfycbytDC53mY-BoaaM_Ux57IlP5Y74xBv5TQS-eAyTa7v1r5IHsIH-E4hXemClKEYOjDj65w/exec";
+
+/** Unidades da campanha. Cada QR aponta para ?unit=<id>. */
+export const UNIDADES = {
+  america: {
+    id: "america",
+    nome: "KNN América",
+    whatsapp: KNN.whatsapp,
+    sheets: SHEETS_URL,
+  },
+  bucarein: {
+    id: "bucarein",
+    nome: "KNN Bucarein",
+    whatsapp: "554797618660",
+    // TODO: endereço /exec do Apps Script da KNN Bucarein
+    sheets: "",
+  },
+} as const;
+
+export type UnidadeId = keyof typeof UNIDADES;
+const UNIDADE_KEY = "mundoKnnUnidade";
+
+/** Unidade fixa na sessão: URL válida define, sessão mantém, padrão América. */
+export function lerUnidade() {
+  if (typeof window === "undefined") return UNIDADES.america;
+  const daUrl = (new URLSearchParams(window.location.search).get("unit") || "").toLowerCase();
+  let id: string | null = null;
+  if (daUrl in UNIDADES) {
+    id = daUrl;
+    try { window.sessionStorage.setItem(UNIDADE_KEY, id); } catch { /* */ }
+  } else {
+    try { id = window.sessionStorage.getItem(UNIDADE_KEY); } catch { id = null; }
+  }
+  return id && id in UNIDADES ? UNIDADES[id as UnidadeId] : UNIDADES.america;
+}
 
 export type Origem = { campanha: string; escola: string; fonte: string; qr: string };
 
@@ -121,14 +155,17 @@ export async function salvarRegistro(registro: Registro): Promise<boolean> {
   } catch {
     /* armazenamento indisponivel */
   }
+  const unidade = lerUnidade();
+  const corpo = { ...registro, unidade: unidade.id, unidade_nome: unidade.nome };
+  if (!unidade.sheets) return false;
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
-    await fetch(SHEETS_URL, {
+    await fetch(unidade.sheets, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(registro),
+      body: JSON.stringify(corpo),
       signal: controller.signal,
     });
     clearTimeout(timer);

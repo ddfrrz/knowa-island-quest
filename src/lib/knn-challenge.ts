@@ -1,5 +1,5 @@
 /** Dados e registro do fluxo 9 a 15 anos: KNN World Challenge. */
-import { KNN, lerOrigem, type Cadastro, type Registro } from "./knn-config";
+import { KNN, lerOrigem, lerUnidade, type Cadastro, type Registro } from "./knn-config";
 
 export type Destino = {
   id: string;
@@ -90,7 +90,7 @@ export function mensagemWhatsAppChallenge(c: Cadastro, p: Progresso) {
 }
 
 export function linkWhatsAppChallenge(c: Cadastro, p: Progresso) {
-  return `https://wa.me/${KNN.whatsapp}?text=${encodeURIComponent(
+  return `https://wa.me/${lerUnidade().whatsapp}?text=${encodeURIComponent(
     mensagemWhatsAppChallenge(c, p),
   )}`;
 }
